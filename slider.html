@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<style>
+    .slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Animation transition */
+}
+
+.slide {
+  min-width: 100%; /* Each slide takes full width */
+  flex: 0 0 auto;
+  transition: transform 0.5s ease-in-out; /* Slide transition */
+}
+
+img {
+  width: 100%; /* Ensure images fill their containers */
+  display: block;
+}
+
+/* Navigation buttons */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+</style>
+<body>
+    <div class="slider">
+        <div class="slides">
+          <div class="slide active">
+            <img src="https://picsum.photos/seed/picsum/200/300" alt="Slide 1">
+          </div>
+          <div class="slide">
+            <img src="https://picsum.photos/seed/picsum/200/300"  alt="Slide 2">
+          </div>
+          <div class="slide">
+            <img src="https://picsum.photos/seed/picsum/200/300"  alt="Slide 3">
+          </div>
+          <!-- Add more slides as needed -->
+        </div>
+        
+        <!-- Navigation arrows -->
+        <button class="prev">❮</button>
+        <button class="next">❯</button>
+      </div>
+      
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+  const slides = document.querySelector(".slides");
+  const slideWidth = document.querySelector(".slide").offsetWidth;
+  let currentIndex = 0;
+
+  // Next slide function
+  nextBtn.addEventListener("click", function() {
+    currentIndex = (currentIndex + 1) % slides.children.length;
+    updateSlidePosition();
+  });
+
+  // Previous slide function
+  prevBtn.addEventListener("click", function() {
+    currentIndex = (currentIndex - 1 + slides.children.length) % slides.children.length;
+    updateSlidePosition();
+  });
+
+  // Update slide position based on currentIndex
+  function updateSlidePosition() {
+    slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+  }
+});
+
+    </script>
+</html>
